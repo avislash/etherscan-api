@@ -14,7 +14,8 @@ type Envelope struct {
 	// 1 for good, 0 for error
 	Status int `json:"status,string"`
 	// OK for good, other words when Status equals 0
-	Message string `json:"message"`
+	Message string          `json:"message"`
+	Error   json.RawMessage `json:"error"` //Used for JSON RPC calls (i.e. when module==proxy)
 	// where response lies
 	Result json.RawMessage `json:"result"`
 }
@@ -171,3 +172,19 @@ type Log struct {
 	Removed         bool     `json:"removed"`
 }
 
+type TxReceipt struct {
+	BlockHash         string `json:"blockHash"`
+	BlockNumber       string `json:"blockNumber"`
+	ContractAddress   string `json:"contractAddress"`
+	CumulativeGasUsed string `json:"cumulativeGasUsed"`
+	EffectiveGasPrice string `json:"effectiveGasPrice"`
+	From              string `json:"from"`
+	GasUsed           string `json:"gasUsed"`
+	Logs              []Log  `json:"logs"`
+	LogsBloom         string `json:"logsBloom"`
+	Status            string `json:"status"`
+	To                string `json:"to"`
+	TransactionHash   string `json:"transactionHash"`
+	TransactionIndex  string `json:"transactionIndex"`
+	Type              string `json:"type"`
+}
